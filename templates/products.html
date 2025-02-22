@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}محصولات - شرکت ما{% endblock %}
+
+{% block content %}
+<div class="container" style="direction: rtl;">
+  <div class="text-center mb-4">
+    <h1>محصولات</h1>
+    <p>محصولات موجود شرکت ما را در زیر مشاهده کنید. برای افزودن محصول جدید، دکمه افزودن محصول را بزنید.</p>
+    <!-- دکمه بازکردن پنجره بارگذاری محصول -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal">
+      افزودن محصول
+    </button>
+  </div>
+
+  <!-- منوی تب محصولات (سطح اول) -->
+  <ul class="nav nav-tabs justify-content-end" id="productTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="perfume-tab" data-bs-toggle="tab" href="#perfume" role="tab" aria-controls="perfume" aria-selected="true">عطر</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="parfum-tab" data-bs-toggle="tab" href="#parfum" role="tab" aria-controls="parfum" aria-selected="false">برفیوم</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="antiperspirant-tab" data-bs-toggle="tab" href="#antiperspirant" role="tab" aria-controls="antiperspirant" aria-selected="false">ضد تعریق</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="airfreshener-tab" data-bs-toggle="tab" href="#airfreshener" role="tab" aria-controls="airfreshener" aria-selected="false">خوشبو کننده محیط</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="bodyfreshener-tab" data-bs-toggle="tab" href="#bodyfreshener" role="tab" aria-controls="bodyfreshener" aria-selected="false">خوشبو کننده بدن</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="packaging-tab" data-bs-toggle="tab" href="#packaging" role="tab" aria-controls="packaging" aria-selected="false">شیشه باک کن</a>
+    </li>
+  </ul>
+
+  <!-- محتویات تب‌های سطح اول -->
+  <div class="tab-content mt-3" id="productTabsContent">
+    <!-- تب عطر -->
+    <div class="tab-pane fade show active" id="perfume" role="tabpanel" aria-labelledby="perfume-tab">
+      <p>اطلاعات محصول: عطر</p>
+    </div>
+
+    <!-- تب برفیوم با تب‌های تو در تو -->
+    <div class="tab-pane fade" id="parfum" role="tabpanel" aria-labelledby="parfum-tab">
+      <!-- منوی تب‌های تو در تو برای برفیوم -->
+      <ul class="nav nav-tabs justify-content-end" id="parfumSubTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="eau-toilette-tab" data-bs-toggle="tab" href="#eau-toilette" role="tab" aria-controls="eau-toilette" aria-selected="true">ادو تویلت</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="eau-parfum-tab" data-bs-toggle="tab" href="#eau-parfum" role="tab" aria-controls="eau-parfum" aria-selected="false">ادو برفیوم</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="parfum-vaxtra-tab" data-bs-toggle="tab" href="#parfum-vaxtra" role="tab" aria-controls="parfum-vaxtra" aria-selected="false">برفیوم واکسترا</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="parfum-normal-tab" data-bs-toggle="tab" href="#parfum-normal" role="tab" aria-controls="parfum-normal" aria-selected="false">برفیوم</a>
+        </li>
+      </ul>
+      <!-- محتویات تب‌های تو در تو برفیوم -->
+      <div class="tab-content mt-3" id="parfumSubTabsContent">
+        <div class="tab-pane fade show active" id="eau-toilette" role="tabpanel" aria-labelledby="eau-toilette-tab">
+          <p>اطلاعات محصول: ادو تویلت</p>
+        </div>
+        <div class="tab-pane fade" id="eau-parfum" role="tabpanel" aria-labelledby="eau-parfum-tab">
+          <p>اطلاعات محصول: ادو برفیوم</p>
+        </div>
+        <div class="tab-pane fade" id="parfum-vaxtra" role="tabpanel" aria-labelledby="parfum-vaxtra-tab">
+          <p>اطلاعات محصول: برفیوم واکسترا</p>
+        </div>
+        <div class="tab-pane fade" id="parfum-normal" role="tabpanel" aria-labelledby="parfum-normal-tab">
+          <p>اطلاعات محصول: برفیوم</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب ضد تعریق با تب‌های تو در تو -->
+    <div class="tab-pane fade" id="antiperspirant" role="tabpanel" aria-labelledby="antiperspirant-tab">
+      <!-- منوی تب‌های تو در تو برای ضد تعریق -->
+      <ul class="nav nav-tabs justify-content-end" id="antiperspirantSubTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="roll-tab" data-bs-toggle="tab" href="#roll" role="tab" aria-controls="roll" aria-selected="true">رول</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="dry-tab" data-bs-toggle="tab" href="#dry" role="tab" aria-controls="dry" aria-selected="false">اسبری</a>
+        </li>
+      </ul>
+      <!-- محتویات تب‌های تو در تو ضد تعریق -->
+      <div class="tab-content mt-3" id="antiperspirantSubTabsContent">
+        <div class="tab-pane fade show active" id="roll" role="tabpanel" aria-labelledby="roll-tab">
+          <p>اطلاعات محصول: ضد تعریق - رول</p>
+        </div>
+        <div class="tab-pane fade" id="dry" role="tabpanel" aria-labelledby="dry-tab">
+          <p>اطلاعات محصول: ضد تعریق - اسبری</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب خوشبو کننده محیط با تب‌های تو در تو -->
+    <div class="tab-pane fade" id="airfreshener" role="tabpanel" aria-labelledby="airfreshener-tab">
+      <!-- منوی تب‌های تو در تو برای خوشبو کننده محیط -->
+      <ul class="nav nav-tabs justify-content-end" id="airfreshenerSubTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="airdry-tab" data-bs-toggle="tab" href="#airdry" role="tab" aria-controls="airdry" aria-selected="true">خوشبو کننده محیط به شکل اسبری</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="airliquid-tab" data-bs-toggle="tab" href="#airliquid" role="tab" aria-controls="airliquid" aria-selected="false">خوشبو کننده محیط به شکل مایع</a>
+        </li>
+      </ul>
+      <!-- محتویات تب‌های تو در تو خوشبو کننده محیط -->
+      <div class="tab-content mt-3" id="airfreshenerSubTabsContent">
+        <div class="tab-pane fade show active" id="airdry" role="tabpanel" aria-labelledby="airdry-tab">
+          <p>اطلاعات محصول: خوشبو کننده محیط به شکل اسبری</p>
+        </div>
+        <div class="tab-pane fade" id="airliquid" role="tabpanel" aria-labelledby="airliquid-tab">
+          <p>اطلاعات محصول: خوشبو کننده محیط به شکل مایع</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- تب خوشبو کننده بدن -->
+    <div class="tab-pane fade" id="bodyfreshener" role="tabpanel" aria-labelledby="bodyfreshener-tab">
+      <p>اطلاعات محصول: خوشبو کننده بدن</p>
+    </div>
+
+    <!-- تب شیشه باک کن -->
+    <div class="tab-pane fade" id="packaging" role="tabpanel" aria-labelledby="packaging-tab">
+      <p>اطلاعات محصول: شیشه باک کن</p>
+    </div>
+  </div>
+
+  <!-- پنجره شناور (Modal) برای بارگذاری محصول -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">بارگذاری محصول</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="productName" class="form-label">نام محصول</label>
+              <input type="text" class="form-control" id="productName" placeholder="نام محصول">
+            </div>
+            <div class="mb-3">
+              <label for="productFile" class="form-label">انتخاب فایل</label>
+              <input class="form-control" type="file" id="productFile">
+            </div>
+            <!-- می‌توانید فیلدهای دیگری نیز اضافه کنید -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+          <button type="button" class="btn btn-primary">بارگذاری</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
