@@ -4,20 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}رایحه ی حیات{% endblock %}</title>
-  <!-- لینک به Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- فونت فارسی (مثلاً Vazir) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
-  <!-- لینک Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
-  <!-- استایل‌های کلی -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/dist/font-face.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <style>
     body {
       font-family: 'Vazir', sans-serif;
       direction: rtl;
       background-color: #f8f9fa;
-      padding-top: 70px; /* فضای کافی برای نوار منوی ثابت */
+      padding-top: 70px;
     }
     .navbar-custom {
       background: rgba(0, 0, 0, 0.6);
@@ -31,54 +26,35 @@
     .navbar-custom .nav-link:hover {
       color: #f0a500;
     }
-    .section-title {
-      font-size: 2.5rem;
-      color: #343a40;
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title::after {
-      content: "";
-      width: 50%;
-      height: 3px;
-      background: #f0a500;
-      position: absolute;
-      bottom: -10px;
-      left: 25%;
-    }
     footer {
       background: #343a40;
       color: #fff;
       padding: 2rem 0;
       text-align: center;
+      margin-top: 2rem;
     }
     footer a {
       color: #f0a500;
       text-decoration: none;
     }
   </style>
-  
-  <!-- بلوک extra_css برای افزودن استایل‌های اختصاصی هر صفحه -->
-  {% block extra_css %}
-  <style>
-    .social-links a {
-      font-size: 1.5rem;
-      color: #f0a500;
-      transition: color 0.3s;
-    }
-    .social-links a:hover {
-      color: #fff;
-    }
-  </style>
-  {% endblock %}
+  {% block extra_css %}{% endblock %}
 </head>
 <body>
-  <!-- نوار منو -->
   <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="{{ url_for('index') }}">رایحه ی حیات</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <svg version="1.1" id="RayeheHayatLogo" xmlns="http://www.w3.org/2000/svg"
+             width="50" height="50" viewBox="0 0 100 100" fill="#f0a500">
+          <circle cx="50" cy="50" r="48" fill="#343a40" />
+          <path d="M40 25 h20 v5 h-20 z M35 30 h30 v30 a15 15 0 0 1 -30 0 z" fill="#f0a500" />
+          <text x="50" y="85" text-anchor="middle" fill="#fff"
+                font-size="10" font-weight="bold" font-family="Vazir">
+            رایحه حیات
+          </text>
+        </svg>
+      </a>      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
               aria-controls="navbarContent" aria-expanded="false" aria-label="تغییر ناوبری">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -88,17 +64,25 @@
           <li class="nav-item"><a class="nav-link" href="{{ url_for('products') }}">محصولات</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">درباره ما</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">تماس</a></li>
+          <!-- 
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">ادمین</a></li>>          
+          -->
         </ul>
       </div>
     </div>
   </nav>
-  
-  <!-- محتوای اصلی صفحات -->
   <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container mt-3">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
   </main>
-  
-  <!-- فوتر -->
   <footer>
     <div class="container">
       <p>&copy; 2025 رایحه ی حیات. کلیه حقوق محفوظ است.</p>
@@ -112,7 +96,6 @@
     </div>
   </footer>
   
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   {% block extra_js %}{% endblock %}
 </body>

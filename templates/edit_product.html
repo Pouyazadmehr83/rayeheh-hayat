@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}ویرایش محصول{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>ویرایش محصول: {{ product.name }}</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label>نام محصول</label>
+            <input type="text" class="form-control" name="name" value="{{ product.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label>دسته‌بندی</label>
+            <select class="form-control" name="category" id="categorySelect">
+                {% for c in categories.keys() %}
+                <option value="{{ c }}" {% if c == product.category %} selected {% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>زیرمجموعه</label>
+            <input type="text" class="form-control" name="subcategory" value="{{ product.subcategory }}">
+        </div>
+        <div class="mb-3">
+            <label>رایحه / اسانس</label>
+            <input type="text" class="form-control" name="scent" value="{{ product.scent }}">
+        </div>
+        <div class="mb-3">
+            <label>وزن</label>
+            <input type="text" class="form-control" name="weight" value="{{ product.weight }}">
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea class="form-control" name="description" rows="3">{{ product.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label>آپلود تصویر جدید (اختیاری)</label><br>
+            <img src="{{ url_for('static', filename=product.image_url.split('static/')[1]) if 'uploads' in product.image_url else product.image_url }}" width="150">
+            <input type="file" class="form-control" name="image_file">
+        </div>
+        <button type="submit" class="btn btn-primary">ویرایش</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">انصراف</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} - رایحه ی حیات{% endblock %}
+
+{% block extra_css %}
+<style>
+  .product-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+  }
+  .product-image {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  .product-info {
+    max-width: 500px;
+    padding: 20px;
+  }
+  .product-info h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .product-info p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  .product-info .btn {
+    background: #f0a500;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 1rem;
+    padding: 8px 16px;
+    margin-top: 20px;
+  }
+  .product-info .btn:hover {
+    background: #d18b00;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container product-details">
+  <div>
+    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+  </div>
+  <div class="product-info">
+    <h1>{{ product.name }}</h1>
+    <p><strong>دسته‌بندی:</strong> {{ product.category }}{% if product.subcategory %} - {{ product.subcategory }}{% endif %}</p>
+    {% if product.scent %}
+      <p><strong>رایحه:</strong> {{ product.scent }}</p>
+    {% endif %}
+    <p>{{ product.description }}</p>
+    <a href="{{ url_for('products') }}" class="btn">بازگشت به محصولات</a>
+  </div>
+</div>
+{% endblock %}

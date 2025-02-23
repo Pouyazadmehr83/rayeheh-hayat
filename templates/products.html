@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
-
 {% block title %}محصولات - رایحه ی حیات{% endblock %}
 
 {% block extra_css %}
 <style>
-  /* بنر محصولات */
   .products-banner {
     position: relative;
     background: url('https://img.freepik.com/free-photo/black-matte-perfume-bottle-pedestal-with-smoke-dark-background_176474-9817.jpg') no-repeat center center/cover;
@@ -29,8 +27,6 @@
     font-size: 3rem;
     font-weight: bold;
   }
-
-  /* دکمه‌های دسته‌بندی */
   .category-buttons {
     text-align: center;
     margin: 2rem 0;
@@ -42,16 +38,19 @@
     border-radius: 20px;
     padding: 8px 16px;
   }
-
-  /* استایل کارت‌های محصول */
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
   .product-card {
     border: none;
     overflow: hidden;
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    max-width: 300px; /* اندازه استاندارد */
-    margin: auto;
+    max-width: 300px;
+    margin: 15px;
   }
   .product-card:hover {
     transform: scale(1.05);
@@ -59,157 +58,88 @@
   }
   .product-card img {
     width: 100%;
-    height: 250px; /* ارتفاع ثابت برای هماهنگی */
+    height: 250px;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-  .product-card .card-body {
+  .card-body {
     background: #fff;
     text-align: center;
     padding: 12px;
   }
-  .product-card h5 {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  .product-card .btn {
-    background: #f0a500;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-  .product-card .btn:hover {
-    background: #d18b00;
-  }
-
-  /* نوار جستجو */
   .search-container {
     max-width: 400px;
     margin: auto;
   }
-  .search-input {
-    padding: 8px;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    transition: 0.3s;
-  }
-  .search-input:focus {
-    border-color: #f0a500;
-    box-shadow: 0 0 8px rgba(240, 165, 0, 0.5);
-  }
-
 </style>
 {% endblock %}
 
 {% block content %}
-
-<!-- بنر محصولات -->
 <section class="products-banner">
   <h1>محصولات ما</h1>
 </section>
 
-<!-- دکمه‌های دسته‌بندی -->
 <section class="container category-buttons">
   <button class="btn btn-outline-warning filter-btn" data-filter="all">همه محصولات</button>
-  <button class="btn btn-outline-warning category-item filter-btn" data-filter="perfume">عطر و ادکلن ▼
-    <div class="sub-category">
-      <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="eau-de-parfum">ادوپرفیوم</button>
-      <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="eau-de-toilette">ادوتویلت</button>
-      <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="parfum">پرفیوم</button>
-    </div>
-  </button>
-  <button class="btn btn-outline-warning filter-btn" data-filter="body-splash">بادی اسپلش</button>
-  <button class="btn btn-outline-warning filter-btn" data-filter="air-freshener">خوشبوکننده‌های محیط</button>
-  <button class="btn btn-outline-warning filter-btn" data-filter="cleaner">شوینده‌ها</button>
+  {% for category in products|groupby('category') %}
+    <button class="btn btn-outline-warning filter-btn" data-filter="{{ category.grouper }}">{{ category.grouper }}</button>
+  {% endfor %}
 </section>
 
-<!-- نوار جستجو -->
 <div class="search-container text-center my-4">
-  <input type="text" id="productSearch" class="form-control search-input" placeholder="جستجوی محصول...">
+  <input type="text" id="productSearch" class="form-control" placeholder="جستجوی محصول...">
 </div>
 
-<!-- لیست محصولات -->
-<div class="col-md-4 mb-4">
-    <div class="card product-card" data-name="عطر خاص" data-category="perfume">
-      <img src="https://example.com/image1.jpg" alt="عطر خاص">
-      <div class="card-body">
-        <h5>عطر خاص</h5>
-        <p>رایحه‌ای منحصر به فرد برای لحظات خاص.</p>
-        <a href="#" class="btn btn-sm">جزئیات بیشتر</a>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-4">
-    <div class="card product-card" data-name="بادی اسپلش شیرین" data-category="body-splash">
-      <img src="https://example.com/image2.jpg" alt="بادی اسپلش">
-      <div class="card-body">
-        <h5>بادی اسپلش شیرین</h5>
-        <p>طراوت و شادابی در تمام روز.</p>
-        <a href="#" class="btn btn-sm">جزئیات بیشتر</a>
-      </div>
-    </div>
-  </div>
-  
 <div class="container">
-  <div class="row justify-content-center" id="productList">
-    <div class="col-md-4 mb-4">
-      <div class="card product-card" data-name="ادوپرفیوم" data-category="eau-de-parfum">
-        <img src="https://www.scentstore.com/wp-content/uploads/elementor/thumbs/spicebomb-extreme-600.jpg" alt="ادوپرفیوم">
-        <div class="card-body">
-          <h5>ادوپرفیوم لوکس</h5>
-          <p>رایحه‌ای ماندگار و خاص برای لحظات ویژه.</p>
-          <a href="#" class="btn btn-sm">جزئیات بیشتر</a>
+  {% for category, items in products|groupby('category') %}
+    <h3 class="mt-4">{{ category }}</h3>
+    <div class="row product-list">
+      {% for product in items %}
+      <div class="col-md-4">
+        <div class="card product-card" data-name="{{ product.name }}" data-category="{{ product.category }}">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}">
+          <div class="card-body">
+            <h5>{{ product.name }}</h5>
+            <p>{{ product.scent }}</p>
+            <a href="{{ url_for('product_details', product_id=product.id) }}" class="btn btn-warning btn-sm">جزئیات</a>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    <div class="col-md-4 mb-4">
-      <div class="card product-card" data-name="بادی اسپلش مردانه" data-category="body-splash">
-        <img src="https://www.scentstore.com/wp-content/uploads/2019/01/Stronger-With-You-Intensely-100ml.jpg" alt="بادی اسپلش">
-        <div class="card-body">
-          <h5>بادی اسپلش مردانه</h5>
-          <p>احساس تازگی و طراوت برای تمام روز.</p>
-          <a href="#" class="btn btn-sm">جزئیات بیشتر</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
-<!-- اسکریپت فیلتر و جستجو -->
 <script>
-  document.getElementById("productSearch").addEventListener("keyup", function () {
+  // جستجو
+  document.getElementById('productSearch').addEventListener('keyup', function(){
     let filter = this.value.toLowerCase();
-    let products = document.querySelectorAll(".product-card");
-
-    products.forEach(function (product) {
-      let productName = product.getAttribute("data-name").toLowerCase();
-      if (productName.includes(filter)) {
-        product.style.display = "block";
+    let products = document.querySelectorAll('.product-card');
+    products.forEach(function(product){
+      let productName = product.getAttribute('data-name').toLowerCase();
+      if(productName.includes(filter)){
+        product.style.display = 'block';
       } else {
-        product.style.display = "none";
+        product.style.display = 'none';
       }
     });
   });
 
-  document.querySelectorAll(".filter-btn").forEach(button => {
-    button.addEventListener("click", function () {
-      let filter = this.getAttribute("data-filter");
-      let products = document.querySelectorAll(".product-card");
-
-      products.forEach(product => {
-        if (filter === "all" || product.getAttribute("data-category") === filter) {
-          product.style.display = "block";
+  // فیلتر
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      let filter = this.getAttribute('data-filter');
+      let products = document.querySelectorAll('.product-card');
+      products.forEach(card => {
+        let cat = card.getAttribute('data-category');
+        if(filter==='all' || cat===filter){
+          card.style.display = 'block';
         } else {
-          product.style.display = "none";
+          card.style.display = 'none';
         }
       });
     });
   });
 </script>
-
 {% endblock %}

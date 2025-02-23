@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}افزودن محصول{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>افزودن محصول جدید</h2>
+    <form method="POST" action="{{ url_for('add_product') }}">
+        <div class="mb-3">
+            <label>نام محصول</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label>دسته‌بندی</label>
+            <input type="text" class="form-control" name="category" required>
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea class="form-control" name="description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label>لینک تصویر</label>
+            <input type="text" class="form-control" name="image_url" required>
+        </div>
+        <button type="submit" class="btn btn-warning">اضافه کردن</button>
+    </form>
+</div>
+{% endblock %}

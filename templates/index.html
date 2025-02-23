@@ -164,42 +164,24 @@
 <section class="container featured-products">
   <h2 class="section-title text-center">محصولات منتخب</h2>
   <div class="row">
-    <!-- محصول 1 -->
+    {% for product in featured_products %}
     <div class="col-md-4">
       <div class="card product-card">
-        <img src="https://www.scentstore.com/wp-content/uploads/elementor/thumbs/spicebomb-extreme-600-o9jibrt2pzlc7qj812s0ed4ftvsikbgtdtpk0l9cog.jpg" alt="عطر لوکس">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
         <div class="card-body">
-          <h5>عطر مردانه خاص</h5>
-          <p>رایحه‌ای لوکس و متفاوت</p>
-          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
+          <h5>{{ product.name }}</h5>
+          <p>{{ product.scent or '...' }}</p>
+          <a href="{{ url_for('product_details', product_id=product.id) }}" class="btn btn-sm btn-warning">
+            جزئیات بیشتر
+          </a>
         </div>
       </div>
     </div>
-
-    <!-- محصول 2 -->
-    <div class="col-md-4">
-      <div class="card product-card">
-        <img src="https://www.scentstore.com/wp-content/uploads/2019/01/Stronger-With-You-Intensely-100ml-570x570.jpg" alt="بادی اسپلش">
-        <div class="card-body">
-          <h5>بادی اسپلش مردانه</h5>
-          <p>طراوت و تازگی در تمام روز</p>
-          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- محصول 3 -->
-    <div class="col-md-4">
-      <div class="card product-card">
-        <img src="https://www.scentstore.com/wp-content/uploads/elementor/thumbs/Le-Beau-75ml-oczleygh9xgggni7atpv7pntnk7rt1lpr364ogzd68.jpg" alt="اسپری خوشبو کننده">
-        <div class="card-body">
-          <h5>اسپری خوشبوکننده</h5>
-          <p>ماندگاری بالا و رایحه دلپذیر</p>
-          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
-        </div>
-      </div>
-    </div>
+    {% else %}
+    <p class="text-center my-3">در حال حاضر محصولی وجود ندارد.</p>
+    {% endfor %}
   </div>
 </section>
+
 
 {% endblock %}

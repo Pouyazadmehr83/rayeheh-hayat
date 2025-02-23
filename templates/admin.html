@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}پنل مدیر - افزودن محصول{% endblock %}
+
+{% block content %}
+<!-- دکمه خروج از ادمین -->
+<a href="{{ url_for('admin_logout') }}" class="btn btn-danger m-3">خروج</a>
+<div class="container mt-5">
+    <h2>افزودن محصول</h2>
+    <form method="POST" enctype="multipart/form-data">  <!-- برای آپلود فایل -->
+        <div class="mb-3">
+            <label>نام محصول</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label>دسته‌بندی</label>
+            <select class="form-control" name="category" id="categorySelect" required>
+                {% for c in categories.keys() %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" id="subcategoryDiv" style="display:none;">
+            <label>زیرمجموعه</label>
+            <select class="form-control" name="subcategory" id="subcategorySelect"></select>
+        </div>
+        <div class="mb-3">
+            <label>رایحه / اسانس</label>
+            <input type="text" class="form-control" name="scent">
+        </div>
+        <div class="mb-3">
+            <label>وزن</label>
+            <input type="text" class="form-control" name="weight">
+        </div>
+        <div class="mb-3">
+            <label>توضیحات</label>
+            <textarea class="form-control" name="description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label>آپلود تصویر</label>
+            <input type="file" class="form-control" name="image_file" required>
+        </div>
+        <button type="submit" class="btn btn-warning">افزودن</button>
+    </form>
+    <hr>
+    <h3 class="mt-5">فهرست محصولات</h3>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>شناسه</th>
+          <th>نام محصول</th>
+          <th>دسته‌بندی</th>
+          <th>زیرمجموعه</th>
+          <th>رایحه</th>
+          <th>وزن</th>
+          <th>ویرایش</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.category }}</td>
+          <td>{{ p.subcategory }}</td>
+          <td>{{ p.scent }}</td>
+          <td>{{ p.weight }}</td>
+          <td>
+            <a href="{{ url_for('edit_product', product_id=p.id) }}" class="btn btn-sm btn-info">ویرایش</a>
+          </td>
+          <td>
+            <a href="{{ url_for('delete_product', product_id=p.id) }}" class="btn btn-sm btn-danger">حذف</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="8" class="text-center">هنوز محصولی اضافه نشده است</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+<script>
+  const categories = {{ categories|tojson }};
+  const categorySelect = document.getElementById("categorySelect");
+  const subcategoryDiv = document.getElementById("subcategoryDiv");
+  const subcategorySelect = document.getElementById("subcategorySelect");
+
+  categorySelect.addEventListener("change", function(){
+    const selectedCat = categorySelect.value;
+    const subs = categories[selectedCat];
+    if(subs.length > 0){
+      subcategoryDiv.style.display = "block";
+      subcategorySelect.innerHTML = "";
+      subs.forEach(s => {
+        const option = document.createElement("option");
+        option.value = s;
+        option.textContent = s;
+        subcategorySelect.appendChild(option);
+      });
+    } else {
+      subcategoryDiv.style.display = "none";
+    }
+  });
+</script>
+{% endblock %}
