@@ -1,92 +1,205 @@
 {% extends 'base.html' %}
 
-{% block title %}خانه - شرکت ما{% endblock %}
+{% block title %}خانه - رایحه ی حیات{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* بنر اصلی */
+  .hero-section {
+    position: relative;
+    background: url('https://img.freepik.com/free-photo/luxury-perfume-glass-bottle-reflection-black-background_1150-11001.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  .hero-content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  .hero-content .btn {
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* بخش دسته‌بندی محصولات */
+  .category-section {
+    text-align: center;
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+  .category-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+  }
+  .category-title::after {
+    content: "";
+    width: 50%;
+    height: 3px;
+    background: #f0a500;
+    position: absolute;
+    bottom: -10px;
+    left: 25%;
+  }
+  .category-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .category-card i {
+    font-size: 3rem;
+    color: #f0a500;
+    margin-bottom: 15px;
+  }
+  .category-card h5 {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  /* نمایش محصولات منتخب */
+  .featured-products {
+    padding: 4rem 0;
+  }
+  .featured-products .product-card {
+    border: none;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .featured-products .product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .featured-products .product-card img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container" style="direction: rtl;">
-  <!-- بخش هرو (Hero Section) -->
-  <div class="jumbotron text-center bg-primary text-white py-5 mb-5" style="background-image: url('https://via.placeholder.com/1200x400'); background-size: cover;">
-    <h1 class="display-4">به شرکت ما خوش آمدید</h1>
-    <p class="lead">اینجا بهترین محصولات و خدمات را برای شما ارائه می‌دهیم.</p>
-    <a href="#about" class="btn btn-light btn-lg">اطلاعات بیشتر</a>
+
+<!-- بخش بنر -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>رایحه‌ای که شما را متمایز می‌کند</h1>
+    <p>تجربه‌ای از عطرهای لوکس، با کیفیتی بی‌نظیر</p>
+    <a href="{{ url_for('products') }}" class="btn btn-warning btn-lg">محصولات ما</a>
   </div>
+</section>
 
-  <!-- بخش درباره ما -->
-  <section id="about" class="mb-5">
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <img src="https://via.placeholder.com/500x300" alt="درباره ما" class="img-fluid rounded">
-      </div>
-      <div class="col-md-6">
-        <h2>درباره ما</h2>
-        <p>شرکت ما با سال‌ها تجربه در ارائه محصولات با کیفیت، به شما اطمینان می‌دهد که بهترین‌ها را دریافت خواهید کرد. ما همواره در تلاش برای بهبود خدمات و محصولات خود هستیم.</p>
-        <a href="{{ url_for('about') }}" class="btn btn-primary">بیشتر بخوانید</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- بخش محصولات -->
-  <section id="products" class="mb-5">
-    <h2 class="text-center mb-4">نمونه محصولات ما</h2>
+<!-- بخش دسته‌بندی محصولات -->
+<section class="category-section">
+  <h2 class="category-title">دسته‌بندی محصولات</h2>
+  <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="محصول 1">
-          <div class="card-body">
-            <h5 class="card-title">محصول 1</h5>
-            <p class="card-text">توضیح مختصر درباره محصول 1.</p>
-            <a href="{{ url_for('products') }}" class="btn btn-primary">مشاهده جزئیات</a>
-          </div>
+      <div class="col-md-3">
+        <div class="category-card">
+          <i class="fas fa-spray-can"></i>
+          <h5>عطر و ادکلن</h5>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="محصول 2">
-          <div class="card-body">
-            <h5 class="card-title">محصول 2</h5>
-            <p class="card-text">توضیح مختصر درباره محصول 2.</p>
-            <a href="{{ url_for('products') }}" class="btn btn-primary">مشاهده جزئیات</a>
-          </div>
+      <div class="col-md-3">
+        <div class="category-card">
+          <i class="fas fa-air-freshener"></i>
+          <h5>بادی اسپلش</h5>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="محصول 3">
-          <div class="card-body">
-            <h5 class="card-title">محصول 3</h5>
-            <p class="card-text">توضیح مختصر درباره محصول 3.</p>
-            <a href="{{ url_for('products') }}" class="btn btn-primary">مشاهده جزئیات</a>
-          </div>
+      <div class="col-md-3">
+        <div class="category-card">
+          <i class="fas fa-pump-soap"></i>
+          <h5>خوشبوکننده محیط</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="category-card">
+          <i class="fas fa-broom"></i>
+          <h5>شوینده‌ها</h5>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <a href="{{ url_for('products') }}" class="btn btn-outline-primary">مشاهده تمامی محصولات</a>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- بخش تماس -->
-  <section id="contact" class="mb-5">
-    <h2 class="text-center mb-4">تماس با ما</h2>
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <form>
-          <div class="mb-3">
-            <label for="name" class="form-label">نام</label>
-            <input type="text" class="form-control" id="name" placeholder="نام شما">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">ایمیل</label>
-            <input type="email" class="form-control" id="email" placeholder="ایمیل شما">
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">پیام</label>
-            <textarea class="form-control" id="message" rows="4" placeholder="پیام شما"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">ارسال پیام</button>
-        </form>
+<!-- بخش محصولات منتخب -->
+<section class="container featured-products">
+  <h2 class="section-title text-center">محصولات منتخب</h2>
+  <div class="row">
+    <!-- محصول 1 -->
+    <div class="col-md-4">
+      <div class="card product-card">
+        <img src="https://www.scentstore.com/wp-content/uploads/elementor/thumbs/spicebomb-extreme-600-o9jibrt2pzlc7qj812s0ed4ftvsikbgtdtpk0l9cog.jpg" alt="عطر لوکس">
+        <div class="card-body">
+          <h5>عطر مردانه خاص</h5>
+          <p>رایحه‌ای لوکس و متفاوت</p>
+          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
+        </div>
       </div>
     </div>
-  </section>
-</div>
+
+    <!-- محصول 2 -->
+    <div class="col-md-4">
+      <div class="card product-card">
+        <img src="https://www.scentstore.com/wp-content/uploads/2019/01/Stronger-With-You-Intensely-100ml-570x570.jpg" alt="بادی اسپلش">
+        <div class="card-body">
+          <h5>بادی اسپلش مردانه</h5>
+          <p>طراوت و تازگی در تمام روز</p>
+          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- محصول 3 -->
+    <div class="col-md-4">
+      <div class="card product-card">
+        <img src="https://www.scentstore.com/wp-content/uploads/elementor/thumbs/Le-Beau-75ml-oczleygh9xgggni7atpv7pntnk7rt1lpr364ogzd68.jpg" alt="اسپری خوشبو کننده">
+        <div class="card-body">
+          <h5>اسپری خوشبوکننده</h5>
+          <p>ماندگاری بالا و رایحه دلپذیر</p>
+          <a href="#" class="btn btn-sm btn-warning">جزئیات بیشتر</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

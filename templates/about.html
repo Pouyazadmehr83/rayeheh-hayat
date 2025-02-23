@@ -1,10 +1,169 @@
 {% extends 'base.html' %}
 
-{% block title %}درباره ما - شرکت ما{% endblock %}
+{% block title %}درباره ما - رایحه ی حیات{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* بنر درباره ما */
+  .about-banner {
+    position: relative;
+    background: url('https://img.freepik.com/free-photo/luxury-perfume-advertisement-with-golden-bottle_23-2148953689.jpg') no-repeat center center/cover;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+  .about-banner::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .about-banner h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  /* محتوای درباره ما */
+  .about-content {
+    padding: 3rem 0;
+  }
+  .about-text {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 2;
+  }
+
+  /* بخش محصولات ما */
+  .product-list {
+    list-style: none;
+    padding: 0;
+  }
+  .product-list li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .product-list li i {
+    color: #f0a500;
+    margin-left: 8px;
+    font-size: 1.5rem;
+  }
+
+  /* کارت‌های اطلاعاتی */
+  .info-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .info-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .info-card i {
+    font-size: 2rem;
+    color: #f0a500;
+  }
+  .info-card h5 {
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  /* بخش تماس و شبکه‌های اجتماعی */
+  .contact-info {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="text-center">
-  <h1>درباره ما</h1>
-  <p>در این صفحه اطلاعات مربوط به شرکت و تاریخچه آن قرار می‌گیرد. این قسمت به مرور زمان تکمیل خواهد شد.</p>
-</div>
+
+<!-- بنر درباره ما -->
+<section class="about-banner">
+  <h1>درباره رایحه ی حیات</h1>
+</section>
+
+<!-- محتوای درباره ما -->
+<section class="container about-content">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h2 class="text-center text-primary mb-3">درباره ما</h2>
+      <p class="about-text">
+        ما در **رایحه ی حیات** با تکیه بر دانش، تجربه و استانداردهای جهانی، تولیدکننده انواع محصولات آرایشی، بهداشتی و خوشبوکننده‌های محیطی هستیم.  
+        هدف ما ارائه محصولاتی با کیفیت بالا، ترکیبات مطمئن و فرمولاسیون نوآورانه است که علاوه بر زیبایی و طراوت، سلامت مصرف‌کنندگان را نیز تضمین کند.
+      </p>
+      <h2 class="text-center text-primary mt-4 mb-3">تعهد ما</h2>
+      <p class="about-text">
+        تعهد ما، استفاده از مواد اولیه مرغوب، بهره‌گیری از فناوری‌های پیشرفته و رعایت استانداردهای بین‌المللی در تمامی مراحل تولید است.  
+        در همین راستا، مجموعه ما سالانه بیش از **[ظرفیت تولید سالانه]** محصول تولید کرده و به دست مشتریان خود می‌رساند.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- بخش محصولات ما -->
+<section class="container">
+  <h2 class="text-center text-primary my-4">محصولات ما</h2>
+  <ul class="product-list text-center">
+    <li><i class="fas fa-check-circle"></i> انواع بادی اسپلش، ادکلن، عطر و اسپری‌های خوشبوکننده بدن</li>
+    <li><i class="fas fa-check-circle"></i> خوشبوکننده‌های محیطی در مدل‌های متنوع</li>
+    <li><i class="fas fa-check-circle"></i> شوینده‌های بهداشتی و تمیزکننده‌های سطوح</li>
+    <li><i class="fas fa-check-circle"></i> سایر محصولات آرایشی و بهداشتی با فرمولاسیون خاص</li>
+    <p>
+        
+    </p>
+  </ul>
+</section>
+
+<!-- کارت‌های اطلاعاتی -->
+<section class="container">
+  <div class="row text-center">
+    <div class="col-md-3">
+      <div class="info-card">
+        <i class="fas fa-check-circle"></i>
+        <h5>کیفیت برتر</h5>
+        <p>تمامی محصولات ما با بالاترین استانداردهای جهانی تولید می‌شوند.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-card">
+        <i class="fas fa-flask"></i>
+        <h5>فرمولاسیون اختصاصی</h5>
+        <p>ترکیبات پیشرفته با ماندگاری بالا و رایحه‌های منحصربه‌فرد.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-card">
+        <i class="fas fa-lightbulb"></i>
+        <h5>نوآوری و توسعه</h5>
+        <p>همواره در حال بهبود و توسعه محصولات جدید بر اساس نیاز مشتریان هستیم.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-card">
+        <i class="fas fa-medal"></i>
+        <h5>استانداردهای جهانی</h5>
+        <p>تمامی مراحل تولید تحت نظارت دقیق و استانداردهای بین‌المللی انجام می‌شود.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- اطلاعات تماس و شبکه‌های اجتماعی -->
+<section class="container contact-info">
+  
+</section>
+
 {% endblock %}
